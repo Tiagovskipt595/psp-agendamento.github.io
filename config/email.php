@@ -29,11 +29,18 @@ function enviarEmailConfirmacao($codigo, $db) {
 
 /**
  * Enviar email genérico
+ * Usa PHPMailer se disponível, caso contrário fallback para mail() nativo
  */
 function enviarEmail($destinatario, $assunto, $corpoHTML, $corpoTexto = '') {
-    // Em produção, usar PHPMailer ou serviço como SendGrid/Mailgun
-    // Por enquanto, usa mail() nativo com headers adequados
+    // Tentar usar PHPMailer se estiver disponível
+    if (file_exists(__DIR__ . '/phpmailer.php')) {
+        require_once __DIR__ . '/phpmailer.php';
+        if (function_exists('enviarEmailPHPMailer')) {
+            return enviarEmailPHPMailer($destinatario, $assunto, $corpoHTML, $corpoTexto);
+        }
+    }
 
+    // Fallback para mail() nativo
     $headers = [
         "From: " . SITE_NAME . " <noreply@psp-agendamento.pt>",
         "Reply-To: noreply@psp-agendamento.pt",
@@ -149,8 +156,8 @@ function enviarLembreteAgendamento($codigo, $db) {
         return false;
     }
 
-    // Verificar se já foi enviado lembrete
-    if (!empty($agendamento['lembrete_enviado'])) {
+    // Verificar se já foi enviado lembrete de 24h
+    if (!empty($agendamento['lembrete_24h_enviado'])) {
         return false;
     }
 
@@ -158,6 +165,72 @@ function enviarLembreteAgendamento($codigo, $db) {
     $corpo = gerarEmailLembreteHTML($agendamento);
 
     return enviarEmail($agendamento['email'], $assunto, $corpo);
+}
+
+/**
+ * Enviar confirmação de cancelamento de agendamento
+ */
+function enviarEmailCancelamento($codigo, $db, $motivo = '') {
+    $stmt = $db->prepare("SELECT a.*, e.nome as esquadra_nome, s.nome as servico_nome
+                          FROM agendamentos a
+                          JOIN esquadras e ON a.esquadra_id = e.id
+                          JOIN servicos s ON a.servico_id = s.id
+                          WHERE a.codigo_agendamento = ?");
+    $stmt->execute([$codigo]);
+    $agendamento = $stmt->fetch();
+
+    if (!$agendamento) {
+        return false;
+    }
+
+    $dataFormatada = formatarData($agendamento['data_agendamento'], 'd/m/Y');
+    $horaFormatada = formatarHora($agendamento['hora_agendamento']);
+
+    $assunto = "Cancelamento de Agendamento - " . $codigo;
+    $corpoHTML = gerarEmailCancelamentoHTML($agendamento, $motivo);
+
+    return enviarEmail($agendamento['email'], $assunto, $corpoHTML);
+}
+
+/**
+ * Gerar email de cancelamento
+ */
+function gerarEmailCancelamentoHTML($agendamento, $motivo = '') {
+    return <<<HTML
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; }
+        .header { background: #003366; color: white; padding: 20px; text-align: center; }
+        .content { padding: 20px; background: #f9f9f9; }
+        .cancelado { background: #dc3545; color: white; padding: 15px; border-radius: 8px; margin: 15px 0; text-align: center; }
+        .detalhes { background: #fff; padding: 15px; border-radius: 8px; }
+        .footer { background: #333; color: #999; padding: 15px; text-align: center; font-size: 12px; }
+    </style>
+</head>
+<body>
+    <div class="header"><h1>❌ Cancelamento PSP</h1></div>
+    <div class="content">
+        <div class="cancelado">Agendamento Cancelado</div>
+        <p>Olá <strong>{$agendamento['nome_cidadao']}</strong>,</p>
+        <p>O seu agendamento foi cancelado.</p>
+        <div class="detalhes">
+            <p><strong>Código:</strong> {$agendamento['codigo_agendamento']}</p>
+            <p><strong>Serviço:</strong> {$agendamento['servico_nome']}</p>
+            <p><strong>Esquadra:</strong> {$agendamento['esquadra_nome']}</p>
+            <p><strong>Data:</strong> {$dataFormatada} às {$horaFormatada}</p>
+            {$motivo ? "<p><strong>Motivo:</strong> " . htmlspecialchars($motivo) . "</p>" : ""}
+        </div>
+        <p style="margin-top: 20px;">Pode voltar a agendar através do nosso site.</p>
+    </div>
+    <div class="footer">
+        <p>&copy; " . date('Y') . " PSP - Polícia de Segurança Pública</p>
+    </div>
+</body>
+</html>
+HTML;
 }
 
 /**

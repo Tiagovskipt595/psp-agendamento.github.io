@@ -71,8 +71,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Enviar email de confirmação
             try {
                 enviarEmailConfirmacao($codigo, $db);
+                error_log("Email de confirmação enviado para: " . $email);
             } catch (Exception $e) {
                 error_log("Erro ao enviar email: " . $e->getMessage());
+            }
+
+            // Enviar SMS de confirmação (se estiver ativo)
+            try {
+                if (file_exists(__DIR__ . '/../config/sms.php')) {
+                    require_once __DIR__ . '/../config/sms.php';
+                    if (defined('SMS_ENABLED') && SMS_ENABLED) {
+                        enviarSMSConfirmacao($codigo, $db);
+                        error_log("SMS de confirmação enviado para: " . $telemovel);
+                    }
+                }
+            } catch (Exception $e) {
+                error_log("Erro ao enviar SMS: " . $e->getMessage());
             }
 
             logSeguranca('agendamento_criado', ['codigo' => $codigo, 'email' => $email]);
