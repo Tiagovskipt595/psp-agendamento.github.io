@@ -1,0 +1,9 @@
+{
+  "commands": {
+    "iniciar": "bash /home/tiagovsk/psp-agendamento/iniciar.sh",
+    "dev": "cd /home/tiagovsk/psp-agendamento/public && php -S localhost:8000",
+    "db-reset": "mysql -u root psp_agendamento < /home/tiagovsk/psp-agendamento/config/database.sql",
+    "ssl": "sudo bash /home/tiagovsk/psp-agendamento/scripts/ativar_ssl.sh",
+    "ssl-menu": "sudo bash /home/tiagovsk/psp-agendamento/scripts/configurar_ssl.sh"
+  }
+}

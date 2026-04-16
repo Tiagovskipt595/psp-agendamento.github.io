@@ -1,0 +1,34 @@
+# URL amigáveis para a aplicação
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /psp-agendamento/public/
+
+    # Redirecionar para HTTPS em produção (descomente quando tiver SSL)
+    # RewriteCond %{HTTPS} off
+    # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # Remover .php das URLs
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME}\.php -f
+    RewriteRule ^(.*)$ $1.php [L]
+
+    # URLs amigáveis para agendamento
+    RewriteRule ^agendar/([0-9]+)/?$ agendar.php?esquadra_id=$1 [L,QSA]
+    RewriteRule ^agendar/([0-9]+)/([0-9]+)/?$ agendar.php?esquadra_id=$1&servico_id=$2 [L,QSA]
+
+    # URLs amigáveis para serviços
+    RewriteRule ^esquadra/([0-9]+)/servicos/?$ servicos.php?esquadra_id=$1 [L,QSA]
+
+    # Validação de código
+    RewriteRule ^validar/([A-Z0-9-]+)/?$ validar.php?codigo=$1 [L,QSA]
+
+    # Confirmacao
+    RewriteRule ^confirmacao/([A-Z0-9-]+)/?$ confirmacao.php?codigo=$1 [L,QSA]
+</IfModule>
+
+# Prevenir listagem de diretórios
+Options -Indexes
+
+# Página de erro personalizada (opcional)
+# ErrorDocument 404 /psp-agendamento/public/404.php
+# ErrorDocument 500 /psp-agendamento/public/500.php

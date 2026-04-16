@@ -1,0 +1,969 @@
+/* ==========================================
+   PSP Agendamento - Estilos Gerais
+   ========================================== */
+
+:root {
+    --primary-color: #003366;
+    --secondary-color: #cc0000;
+    --accent-color: #ffcc00;
+    --light-bg: #f5f5f5;
+    --white: #ffffff;
+    --text-dark: #333333;
+    --text-light: #666666;
+    --success: #28a745;
+    --warning: #ffc107;
+    --danger: #dc3545;
+    --info: #17a2b8;
+    --border-radius: 8px;
+    --shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--light-bg);
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+/* ==========================================
+   Header
+   ========================================== */
+
+header {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #001a33 100%);
+    color: var(--white);
+    padding: 1rem 0;
+    box-shadow: var(--shadow);
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo-icon {
+    font-size: 2.5rem;
+}
+
+.logo h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.logo span {
+    font-size: 0.85rem;
+    opacity: 0.8;
+    display: block;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+nav a {
+    color: var(--white);
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: var(--border-radius);
+    transition: background 0.3s;
+}
+
+nav a:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+.btn-login {
+    background: var(--accent-color);
+    color: var(--primary-color) !important;
+    font-weight: 600;
+}
+
+/* ==========================================
+   Container Principal
+   ========================================== */
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
+.container-narrow {
+    max-width: 600px;
+}
+
+/* ==========================================
+   Cards
+   ========================================== */
+
+.card {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 30px;
+    margin-bottom: 20px;
+}
+
+.card-header {
+    border-bottom: 2px solid var(--light-bg);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.card-header h2 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+}
+
+.card-header p {
+    color: var(--text-light);
+    margin-top: 5px;
+}
+
+/* ==========================================
+   Formulários
+   ========================================== */
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0,51,102,0.1);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+/* ==========================================
+   Botões
+   ========================================== */
+
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: center;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: var(--white);
+}
+
+.btn-primary:hover {
+    background: #002244;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,51,102,0.3);
+}
+
+.btn-secondary {
+    background: #6c757d;
+    color: var(--white);
+}
+
+.btn-secondary:hover {
+    background: #5a6268;
+}
+
+.btn-success {
+    background: var(--success);
+    color: var(--white);
+}
+
+.btn-success:hover {
+    background: #218838;
+}
+
+.btn-danger {
+    background: var(--danger);
+    color: var(--white);
+}
+
+.btn-danger:hover {
+    background: #c82333;
+}
+
+.btn-warning {
+    background: var(--warning);
+    color: var(--text-dark);
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+}
+
+.btn-lg {
+    padding: 15px 30px;
+    font-size: 1.1rem;
+}
+
+/* ==========================================
+   Grid de Esquadras e Serviços
+   ========================================== */
+
+.grid-esquadras,
+.grid-servicos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.card-esquadra,
+.card-servico {
+    background: var(--white);
+    border: 2px solid #e0e0e0;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.card-esquadra:hover,
+.card-servico:hover {
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow);
+    transform: translateY(-3px);
+}
+
+.card-esquadra.selected,
+.card-servico.selected {
+    border-color: var(--primary-color);
+    background: rgba(0,51,102,0.05);
+}
+
+.card-esquadra h3,
+.card-servico h3 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.card-esquadra p,
+.card-servico p {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.card-servico .duracao {
+    display: inline-block;
+    background: var(--light-bg);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    margin-top: 10px;
+}
+
+/* ==========================================
+   Calendário
+   ========================================== */
+
+.calendario {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+}
+
+.calendario-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.calendario-header h3 {
+    color: var(--primary-color);
+}
+
+.calendario-nav {
+    display: flex;
+    gap: 10px;
+}
+
+.calendario-nav button {
+    background: var(--light-bg);
+    border: none;
+    padding: 8px 15px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.calendario-nav button:hover {
+    background: #e0e0e0;
+}
+
+.dias-semana {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.dias-semana span {
+    text-align: center;
+    font-weight: 600;
+    color: var(--text-light);
+    padding: 10px;
+}
+
+.dias-mes {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.dia {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all 0.3s;
+    border: 2px solid transparent;
+}
+
+.dia:hover:not(.vazio):not(.desabilitado) {
+    background: var(--light-bg);
+}
+
+.dia.hoje {
+    border-color: var(--primary-color);
+    font-weight: 600;
+}
+
+.dia.selecionado {
+    background: var(--primary-color);
+    color: var(--white);
+}
+
+.dia.vazio,
+.dia.desabilitado {
+    cursor: default;
+    opacity: 0.3;
+}
+
+.dia.com-agendamentos {
+    background: rgba(204,0,0,0.1);
+}
+
+.dia.com-agendamentos.selecionado {
+    background: var(--secondary-color);
+}
+
+/* ==========================================
+   Slots de Horário
+   ========================================== */
+
+.slots-horario {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.slot {
+    padding: 12px;
+    text-align: center;
+    border: 2px solid #e0e0e0;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all 0.3s;
+    background: var(--white);
+}
+
+.slot:hover:not(.disponivel):not(.selecionado) {
+    border-color: var(--info);
+}
+
+.slot.selecionado {
+    background: var(--primary-color);
+    color: var(--white);
+    border-color: var(--primary-color);
+}
+
+.slot.ocupado {
+    background: #e0e0e0;
+    color: #999;
+    cursor: not-allowed;
+}
+
+/* ==========================================
+   Alertas e Flash Messages
+   ========================================== */
+
+.alert {
+    padding: 15px 20px;
+    border-radius: var(--border-radius);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.alert-success {
+    background: rgba(40,167,69,0.1);
+    border: 1px solid var(--success);
+    color: var(--success);
+}
+
+.alert-danger {
+    background: rgba(220,53,69,0.1);
+    border: 1px solid var(--danger);
+    color: var(--danger);
+}
+
+.alert-warning {
+    background: rgba(255,193,7,0.1);
+    border: 1px solid var(--warning);
+    color: #856404;
+}
+
+.alert-info {
+    background: rgba(23,162,184,0.1);
+    border: 1px solid var(--info);
+    color: var(--info);
+}
+
+/* ==========================================
+   Tabela de Agendamentos (Dashboard)
+   ========================================== */
+
+.tabela-agendamentos {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--white);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.tabela-agendamentos thead {
+    background: var(--primary-color);
+    color: var(--white);
+}
+
+.tabela-agendamentos th,
+.tabela-agendamentos td {
+    padding: 15px;
+    text-align: left;
+}
+
+.tabela-agendamentos tbody tr {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.tabela-agendamentos tbody tr:hover {
+    background: var(--light-bg);
+}
+
+.tabela-agendamentos tbody tr:last-child {
+    border-bottom: none;
+}
+
+/* Estados */
+.estado {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.estado-confirmado {
+    background: rgba(23,162,184,0.1);
+    color: var(--info);
+}
+
+.estado-presente {
+    background: rgba(255,193,7,0.1);
+    color: #856404;
+}
+
+.estado-em_atendimento {
+    background: rgba(0,51,102,0.1);
+    color: var(--primary-color);
+}
+
+.estado-concluido {
+    background: rgba(40,167,69,0.1);
+    color: var(--success);
+}
+
+.estado-cancelado,
+.estado-faltou {
+    background: rgba(220,53,69,0.1);
+    color: var(--danger);
+}
+
+/* ==========================================
+   Código de Agendamento / QR Code
+   ========================================== */
+
+.confirmacao {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.confirmacao .codigo {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    background: var(--light-bg);
+    padding: 20px 40px;
+    border-radius: var(--border-radius);
+    display: inline-block;
+    margin: 20px 0;
+    letter-spacing: 3px;
+}
+
+.confirmacao .qr-code {
+    width: 200px;
+    height: 200px;
+    margin: 20px auto;
+    background: var(--white);
+    border: 2px solid #e0e0e0;
+}
+
+/* ==========================================
+   Dashboard do Agente
+   ========================================== */
+
+.dashboard {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 20px;
+}
+
+.sidebar {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 20px;
+    height: fit-content;
+}
+
+.sidebar h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--light-bg);
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar li {
+    margin-bottom: 10px;
+}
+
+.sidebar a {
+    display: block;
+    padding: 10px 15px;
+    color: var(--text-dark);
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    transition: all 0.3s;
+}
+
+.sidebar a:hover,
+.sidebar a.ativo {
+    background: var(--primary-color);
+    color: var(--white);
+}
+
+.dashboard-content {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 30px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background: var(--light-bg);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    text-align: center;
+}
+
+.stat-card .numero {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.stat-card .label {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+/* ==========================================
+   Modal
+   ========================================== */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+}
+
+.modal-overlay.ativo {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    max-width: 500px;
+    width: 90%;
+    transform: translateY(-20px);
+    transition: transform 0.3s;
+}
+
+.modal-overlay.ativo .modal {
+    transform: translateY(0);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.modal-header h3 {
+    color: var(--primary-color);
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-light);
+}
+
+/* ==========================================
+   Footer
+   ========================================== */
+
+footer {
+    background: var(--primary-color);
+    color: var(--white);
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+}
+
+footer p {
+    opacity: 0.8;
+    font-size: 0.9rem;
+}
+
+/* ==========================================
+   Responsividade
+   ========================================== */
+
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        order: 2;
+    }
+
+    .tabela-agendamentos {
+        font-size: 0.85rem;
+    }
+
+    .tabela-agendamentos th,
+    .tabela-agendamentos td {
+        padding: 10px 5px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==========================================
+   Utilitários
+   ========================================== */
+
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.mt-1 { margin-top: 10px; }
+.mt-2 { margin-top: 20px; }
+.mb-1 { margin-bottom: 10px; }
+.mb-2 { margin-bottom: 20px; }
+.hidden { display: none; }
+
+/* ==========================================
+   Validação de Formulários
+   ========================================== */
+
+.form-group.error input,
+.form-group.error select,
+.form-group.error textarea {
+    border-color: var(--danger);
+    background-color: rgba(220, 53, 69, 0.02);
+}
+
+.form-group.error label {
+    color: var(--danger);
+}
+
+.error-message {
+    display: block;
+    color: var(--danger);
+    font-size: 0.85rem;
+    margin-top: 5px;
+    animation: shake 0.3s ease;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+.form-group.success input {
+    border-color: var(--success);
+}
+
+/* ==========================================
+   Step Indicator (Progresso)
+   ========================================== */
+
+.step-indicator {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.step-indicator::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #e0e0e0;
+    z-index: 0;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    flex: 1;
+}
+
+.step-number {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--white);
+    border: 3px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: var(--text-light);
+    transition: all 0.3s;
+}
+
+.step-label {
+    margin-top: 8px;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    text-align: center;
+}
+
+.step.ativa .step-number {
+    border-color: var(--primary-color);
+    background: var(--primary-color);
+    color: var(--white);
+}
+
+.step.completa .step-number {
+    border-color: var(--success);
+    background: var(--success);
+    color: var(--white);
+}
+
+.step.completa .step-label {
+    color: var(--success);
+}
+
+/* ==========================================
+   Loading Spinner
+   ========================================== */
+
+.spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    border-top-color: var(--white);
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.spinner-primary {
+    border-color: rgba(0, 51, 102, 0.3);
+    border-top-color: var(--primary-color);
+}
+
+/* ==========================================
+   Skeleton Loading
+   ========================================== */
+
+.skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s ease infinite;
+    border-radius: var(--border-radius);
+}
+
+@keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* ==========================================
+   Empty State
+   ========================================== */
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-light);
+}
+
+.empty-state-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    opacity: 0.5;
+}
+
+.empty-state h3 {
+    color: var(--text-dark);
+    margin-bottom: 10px;
+}
+
+/* ==========================================
+   Animações de Entrada
+   ========================================== */
+
+.fade-in {
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.slide-in {
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+}

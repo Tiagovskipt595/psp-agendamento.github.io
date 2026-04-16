@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendamento PSP - Polícia de Segurança Pública</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Reset e base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            font-size: 2.5rem;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+
+        .logo h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #003366, #667eea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo span {
+            font-size: 0.8rem;
+            color: #666;
+            display: block;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        nav a[href="index.html"] {
+            background: linear-gradient(135deg, #003366, #1a5276);
+            color: white;
+        }
+
+        nav a[href="index.html"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 51, 102, 0.3);
+        }
+
+        .btn-login {
+            background: linear-gradient(135deg, #f39c12, #e74c3c) !important;
+            color: white !important;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(243, 156, 18, 0.4);
+        }
+
+        /* Container Principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-section h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+            background: linear-gradient(135deg, #003366, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+        .hero-section p {
+            color: #666;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #003366, #1a5276);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 51, 102, 0.4);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
+        }
+
+        /* Títulos de Seção */
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            margin: 2.5rem 0 1.5rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Grid de Esquadras */
+        .grid-esquadras {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .card-esquadra {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid transparent;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-esquadra::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #003366, #667eea, #764ba2);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .card-esquadra:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card-esquadra:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+
+        .card-esquadra h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #003366;
+            margin-bottom: 1rem;
+        }
+
+        .card-esquadra p {
+            color: #666;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tag-agendar {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1.25rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .card-esquadra:hover .tag-agendar {
+            background: linear-gradient(135deg, #764ba2, #667eea);
+            transform: scale(1.05);
+        }
+
+        /* Seção Como Funciona */
+        .section-info {
+            margin-top: 4rem;
+            padding: 3rem 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-info h3 {
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #003366;
+            margin-bottom: 2.5rem;
+        }
+
+        .grid-passos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .passo {
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .passo:hover {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            transform: translateY(-5px);
+        }
+
+        .passo-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+        }
+
+        .passo-number {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .passo strong {
+            display: block;
+            font-size: 1.1rem;
+            color: #003366;
+            margin-bottom: 0.5rem;
+        }
+
+        .passo p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #003366, #1a1a2e);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        footer p {
+            opacity: 0.9;
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+
+        footer p:last-child {
+            color: #f39c12;
+            font-weight: 600;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            nav ul {
+                gap: 0.5rem;
+            }
+
+            .hero-section {
+                padding: 2rem 1rem;
+            }
+
+            .hero-section h1 {
+                font-size: 1.8rem;
+            }
+
+            .btn {
+                padding: 0.875rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .grid-esquadras {
+                grid-template-columns: 1fr;
+            }
+
+            .grid-passos {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .passo-icon {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .grid-passos {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* Animações */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .logo-icon {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <span class="logo-icon">👮</span>
+                <div>
+                    <h1>Agendamento PSP</h1>
+                    <span>Polícia de Segurança Pública</span>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="login.php" class="btn-login">Área do Agente</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <!-- Hero Section -->
+            <div class="hero-section">
+                <h1>👮 Agendamento Online PSP</h1>
+                <p>Agende seu atendimento de forma rápida e simples</p>
+
+                <div class="hero-buttons">
+                    <a href="#esquadras" class="btn btn-primary">
+                        📍 Selecionar Esquadra
+                    </a>
+                    <a href="validar.php" class="btn btn-success">
+                        ✅ Validar Agendamento
+                    </a>
+                </div>
+            </div>
+
+            <!-- Esquadras Disponíveis -->
+            <h2 class="section-title" id="esquadras">Esquadras Disponíveis</h2>
+
+            <div class="grid-esquadras">
+                <div class="card-esquadra" onclick="selecionarEsquadra(1)">
+                    <h3>🏛️ Esquadra Central de Lisboa</h3>
+                    <p>📍 Praça da Figueira, Lisboa</p>
+                    <p>📞 21 345 6789</p>
+                    <span class="tag-agendar">Agendar →</span>
+                </div>
+                <div class="card-esquadra" onclick="selecionarEsquadra(2)">
+                    <h3>🌊 Esquadra do Porto</h3>
+                    <p>📍 Rua da Constituição, Porto</p>
+                    <p>📞 22 123 4567</p>
+                    <span class="tag-agendar">Agendar →</span>
+                </div>
+                <div class="card-esquadra" onclick="selecionarEsquadra(3)">
+                    <h3>📚 Esquadra de Coimbra</h3>
+                    <p>📍 Avenida Sá da Bandeira, Coimbra</p>
+                    <p>📞 23 987 6543</p>
+                    <span class="tag-agendar">Agendar →</span>
+                </div>
+                <div class="card-esquadra" onclick="selecionarEsquadra(4)">
+                    <h3>🏖️ Esquadra de Faro</h3>
+                    <p>📍 Rua do Alportel, Faro</p>
+                    <p>📞 28 456 7890</p>
+                    <span class="tag-agendar">Agendar →</span>
+                </div>
+            </div>
+
+            <!-- Informações Rápidas -->
+            <div class="section-info">
+                <h3>Como Funciona</h3>
+                <div class="grid-passos">
+                    <div class="passo">
+                        <span class="passo-number">1</span>
+                        <div class="passo-icon">🗺️</div>
+                        <strong>Escolha a Esquadra</strong>
+                        <p>Selecione a esquadra mais próxima de si</p>
+                    </div>
+                    <div class="passo">
+                        <span class="passo-number">2</span>
+                        <div class="passo-icon">📋</div>
+                        <strong>Selecione o Serviço</strong>
+                        <p>Escolha o tipo de atendimento necessário</p>
+                    </div>
+                    <div class="passo">
+                        <span class="passo-number">3</span>
+                        <div class="passo-icon">📅</div>
+                        <strong>Agende</strong>
+                        <p>Escolha a data e hora mais convenientes</p>
+                    </div>
+                    <div class="passo">
+                        <span class="passo-number">4</span>
+                        <div class="passo-icon">✉️</div>
+                        <strong>Confirme</strong>
+                        <p>Receba confirmação por email ou SMS</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Agendamento PSP - Polícia de Segurança Pública</p>
+        <p>🚨 Em caso de emergência, ligue 112</p>
+    </footer>
+
+    <script>
+    function selecionarEsquadra(esquadraId) {
+        window.location.href = 'servicos.php?esquadra_id=' + esquadraId;
+    }
+
+    // Smooth scroll para links internos
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+    </script>
+</body>
+</html>
